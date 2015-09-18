@@ -3,9 +3,14 @@ package org.foodie.server.controller;
 import java.util.List;
 
 import org.foodie.server.entity.Restaurant;
+import org.foodie.server.infor.Infor;
+import org.foodie.server.infor.RestaurantListInfo;
+import org.foodie.server.infor.StatusCode;
 import org.foodie.server.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -53,23 +58,33 @@ public class RestaurantController {
 	
 	@RequestMapping("/update")
 	@ResponseBody
-	public String update(){
-		//test data
-		long id = 1;
-		Restaurant restaurant = new Restaurant(id);
-		restaurant.setName("newName");
+	public Infor update(@RequestBody()Restaurant restaurant){
 		try{
 			restaurantService.update(restaurant);
 		}catch(Exception e){
-			return "error";
+			return new Infor(e.toString(),StatusCode.PERSIST_ERROR);
 		}
-		return "success!";
+		return new Infor();
+	}
+	
+	@RequestMapping("/restaurantList")
+	@ResponseBody
+	public RestaurantListInfo getAll(){
+		List<Restaurant> restaurants = null;
+		try{
+			restaurants=restaurantService.query();
+		}catch(Exception e){
+			return new RestaurantListInfo(e.toString(),StatusCode.PERSIST_ERROR);
+		}
+		if(restaurants!=null&&restaurants.size()!=0){
+			return new RestaurantListInfo(restaurants);
+		}
+		return null;
 	}
 	
 	@RequestMapping("/query")
 	@ResponseBody
-	public List<Restaurant> query(){
-		return restaurantService.query();
+	public Restaurant query(@RequestParam("id")long id){
+		return restaurantService.queryId(id);
 	}
-	
 }

@@ -25,8 +25,7 @@ public class RestaurantServiceImp implements RestaurantService {
 
 	@Override
 	public void update(Restaurant updatedRestaurant) {
-		restaurantDao.save(updatedRestaurant);
-		
+		restaurantDao.save(updatedRestaurant);		
 	}
 
 	@Override
@@ -34,7 +33,9 @@ public class RestaurantServiceImp implements RestaurantService {
 		return restaurantDao.findAll();
 				
 	}
-	
-	
 
+	@Override
+	public Restaurant queryId(long id) {		
+		return restaurantDao.findById(id);
+	}
 }

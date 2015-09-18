@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -7,8 +6,7 @@
 		<link href="css/lib/bootstrap.min.css" rel="stylesheet">
 		<link href="css/left_menu.css" rel="stylesheet">
 		<link href="css/styles.css" rel="stylesheet">
-		<link rel="import" href="hot.html">
-		<title>Foodie</title>
+		<title>Feed Me</title>
 		<style type="text/css">object,embed{-webkit-animation-duration:.001s;-webkit-animation-name:playerInserted;-ms-animation-duration:.001s;-ms-animation-name:playerInserted;-o-animation-duration:.001s;-o-animation-name:playerInserted;animation-duration:.001s;animation-name:playerInserted;}@-webkit-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}@-ms-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}@-o-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}@keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}</style>
 	</head>
 	<body>
@@ -16,23 +14,32 @@
 		<nav>
 		  <ul class="list-unstyled main-menu">
 		    <!--Include your navigation here-->
-		    <li class="text-right">
-		    	<a href="#" id="nav-close">X</a></li>
+		    <a href="#" id="nav-close"><li class="text-right">Filter &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-times"></i> &nbsp;</li></a>
 				<a href="#"><li> Online Pay <span class="icon"></span></li></a>
 				<a href="#"><li> Deals <span class="icon"></span></li></a><hr/>
-				<a href="#"><li> Food with country <i class="fa fa-angle-down"></i></i></li></a>
-					<ul class="list-unstyled" data-index="0" >
-		    	<a href="#"><li class="sub-nav"> China <span class="icon"></span></li></a>
-		    	<a href="#"><li class="sub-nav"> India <span class="icon"></span></li></a>
-		    	<a href="#"><li class="sub-nav"> Korea <span class="icon"></span></li></a>
-					<a href="#"><li class="sub-nav"> Singapore <span class="icon"></span></li></a>
+				<a href="#">
+					<li class="sub-nav" >
+						<i class="forder" data-status="open"> Food with country
+							<i class="fa fa-angle-down"></i>
+						</i>
+					<ul class="list-unstyled" data-index="0" style="display:block" >
+		    	<a href="#"><li class="sub-sub-nav"> China <span class="icon"></span></li></a>
+		    	<a href="#"><li class="sub-sub-nav"> India <span class="icon"></span></li></a>
+		    	<a href="#"><li class="sub-sub-nav"> Korea <span class="icon"></span></li></a>
+					<a href="#"><li class="sub-sub-nav"> Singapore <span class="icon"></span></li></a>
 					</ul>
-		    <a href="#"><li> Australia <i class="fa fa-angle-down"></i></i></li></a>
-					<ul class="list-unstyled" data-index="0" >
+				</li>
+				</a>
+		    <a href="#"><li class="sub-nav" data-status="open">
+					<i class="forder" data-status="open">
+						Australia <i class="fa fa-angle-down"></i>
+					</i>
+					<ul class="list-unstyled" data-index="1" style="display:block" >
 						<!-- style="display: none;" -->
-		          <a href="#"><li class="sub-nav"> Pizza <span class="icon"></span></li></a>
-		          <a href="#"><li class="sub-nav"> Burge <span class="icon"></span></li></a>
+		          <a href="#"><li class="sub-sub-nav"> Pizza <span class="icon"></span></li></a>
+		          <a href="#"><li class="sub-sub-nav"> Burge <span class="icon"></span></li></a>
 		      </ul>
+				</li></a>
 		    <!-- </li></a> -->
 		  </ul>
 		</nav>
@@ -115,83 +122,109 @@
 </div>
 
 	<!-- script references -->
-	<script src="js/lib/jquery.min.js"></script>
-	<script src="js/lib/bootstrap.min.js"></script>
-	<script src="js/lib/jquery.navgoco.js"></script>
+	<script src="js/webjars/jquery.min.js"></script>
+	<script src="js/webjars/bootstrap.min.js"></script>
+	<!-- <script src="js/lib/jquery.navgoco.js"></script> -->
+	<script src="js/commonRest.js"></script>
+	<script src="js/commonPath.js"></script>
+	<script src="js/restaurant.js"></script>
 	<script>
 		$(document).ready(function(){
-
        //Navigation Menu Slider
         $('#nav-expander').on('click',function(e){
       		e.preventDefault();
-      		$('body').toggleClass('nav-expanded');
+      		$('body').removeClass('nav-expanded');
       	});
       	$('#nav-close').on('click',function(e){
       		e.preventDefault();
-      		$('body').removeClass('nav-expanded');
+      		$('body').toggleClass('nav-expanded');
       	});
+       });
 
-      	// Initialize navgoco with default options
-        $(".main-menu").navgoco({
-            caret: '<span class="caret"></span>',
-            accordion: false,
-            openClass: 'open',
-            save: true,
-            cookie: {
-                name: 'navgoco',
-                expires: false,
-                path: '/'
-            },
-            slide: {
-                duration: 300,
-                easing: 'swing'
-            }
-        });
 
-      });
-			function active_tab(e){
-				$(".nav-tabs li").removeClass("active");
-				$(e).addClass( "active");
-				//alert(e);
-				$("#shops").hide();
-				$("#dishes").hide();
-				$("#delivery_together").hide();
-				if(e ==="#restaurant"){
-					$("#shops").show();
-				}
-				else if(e ==="#hot"){
-					$("#dishes").show();
-				}else if(e ==="#together"){
-					$("#delivery_together").show();
-				}
 
-			}
 
-			function show_dish_detail(id){
-				//xuezialert(id);
-				$(id+" .thumbnail .caption .dish_desc").show();
-				$(id+" .thumbnail .caption .ingredient i").html("<a href='#' onclick=hidden_dish_detail('"+id+"')>Hidden</a>");
 
-			}
-			function hidden_dish_detail(id){
-				//alert(id);
-				$(id+" .thumbnail .caption .dish_desc").hide();
-				$(id+" .thumbnail .caption .ingredient i").html("<a href='#' onclick=show_dish_detail('"+id+"')>Show More</a>");
 
-			}
-
-		</script>
-		<script type="text/javascript">
 		$(window).load(function(){
-			$('#shops').load('restaurants.html');
-			$('#dishes').load('dishes.html');
-			$('#delivery_together').load('delivery_together.html');
-
+			// $('#shops').load('restaurants.html');
+			// $('#dishes').load('dishes.html');
+			// $('#delivery_together').load('delivery_together.html');
+			//
 			// $("#shops").hide();
-			// $("#dishes").hide();
+			$("#dishes").hide();
 			// $("#delivery_together").hide();
 
 		});
+
+	$(document).ready(function(){
+
+		$('.forder').on('click', function(){
+			var status = $(this).data('status');
+			if(status==='open'){
+				$(this).data('status','close');
+			//console.log($(this).parent().parent().find("ul"));
+				$(this).parent().parent().find("ul").slideUp();
+			}else if(status==='close'){
+				$(this).data('status','open');
+				// console.log(this);
+				$(this).parent().parent().find("ul").slideDown();
+			}
+		});
+
+		$('.show_dish_detail').on('click', function(){
+			var status = $(this).data('status');
+			if(status==='close'){
+				$(this).data('status','open');
+				//console.log($(this).parent().parent().find(".dish_desc"));
+				$(this).parent().parent().find(".dish_desc").slideDown();
+				$(this).html("Hidden");
+			}else if(status==='open'){
+				$(this).data('status','close');
+				// console.log(this);
+				$(this).parent().parent().find(".dish_desc").slideUp();
+				$(this).html("Show More");
+			}
+		});
+
+	});
+
+	function active_tab(e){
+		$(".nav-tabs li").removeClass("active");
+		$(e).addClass( "active");
+		//alert(e);
+		$("#shops").hide();
+		$("#dishes").hide();
+		$("#delivery_together").hide();
+		if(e ==="#restaurant"){
+			$("#shops").show();
+		}
+		else if(e ==="#hot"){
+			$("#dishes").show();
+		}else if(e ==="#together"){
+			$("#delivery_together").show();
+		}
+	}
+
+		$(window).load(function(){
+			restGet('http://localhost:8080/restaurants/restaurantList',GET_METHOD, function(data){
+				$.each(data, function(i, restaurant){
+					shopAppend(restaurant);
+					// $('#shops').append('DDDDD:'+restaurant.name);
+				});
+
+			}, '');
+		});
+
+		$(window).load(function(){
+			restGet('http://localhost:8080/dishes/query',GET_METHOD, function(data){
+				$.each(data, function(i, dish){
+					dishAppend(dish);
+					// $('#shops').append('DDDDD:'+restaurant.name);
+				});
+
+			}, '')
+		})
   </script>
 	</body>
 </html>

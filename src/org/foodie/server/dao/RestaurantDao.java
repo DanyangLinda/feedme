@@ -19,6 +19,8 @@ public interface RestaurantDao extends CrudRepository<Restaurant, Long> {
    * @param email the user email.
    */
   public List<Restaurant> findAll();
+
+  public Restaurant findById(long id);
    
 
 } // class UserDao

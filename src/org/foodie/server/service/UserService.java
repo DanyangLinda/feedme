@@ -1,7 +1,6 @@
 package org.foodie.server.service;
 
 import org.foodie.server.entity.User;
-import org.springframework.stereotype.Service;
 
 /**
  * 

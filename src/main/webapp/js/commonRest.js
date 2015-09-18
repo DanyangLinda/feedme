@@ -7,7 +7,7 @@ var USER_PATH = "/users";
 var DEVICE_PATH = "/devices";
 var SIGNIN_PATH = "/users/signin";
 
-var NO_RESULT = "There's no result from the server";
+const NO_RESULT = "There's no result from the server";
 
 const GET_METHOD = 'GET';
 const POST_METHOD = 'POST';
@@ -17,7 +17,7 @@ const DELETE_METHOD = 'DELETE';
 const NORMAL_STATUS = 9200;
 const LOADING = "Loading...";
 
-function restGet(restUrl, httpMethod, callback,resultDiv) {
+function restGet(restUrl, httpMethod, callback, resultDiv) {
     rest(restUrl, httpMethod, "", "application/json", "json", callback, resultDiv);
 }
 
@@ -26,7 +26,6 @@ function restSet(restUrl, httpMethod, entity, callback, resultDiv) {
 }
 
 function rest(restUrl, httpMethod, entity, contentType, dataType, callback, resultDiv) {
-	console.log("enter rest");
     var resultLine = jQuery(resultDiv);
     resultLine.html(LOADING);
     var request = jQuery.ajax({type: httpMethod, url: restUrl, data: entity, contentType: contentType, dataType: dataType});
@@ -37,6 +36,7 @@ function rest(restUrl, httpMethod, entity, contentType, dataType, callback, resu
             } else if (data.statusCode && data.statusCode != NORMAL_STATUS) {
                 resultLine.html("StatusCode:"+data.statusCode+"  " + data.statusInfo);
             } else if (callback != null) {
+            	console.log("success return");
                 resultLine.html("");
                 callback(data);
             }
@@ -53,7 +53,7 @@ function rest(restUrl, httpMethod, entity, contentType, dataType, callback, resu
 function checkSignIn() {
     var storageUserId = storage.getItem("userId");
     if (storageUserId == null) {
-       // window.location.href = ATUP_PAGE_URI + "signIn.html";
+       window.location.href = ATUP_PAGE_URI + "signIn.html";
     } else {
         var user = storage.getItem("userName");
         jQuery('#topDiv').html("Welcome " + user);

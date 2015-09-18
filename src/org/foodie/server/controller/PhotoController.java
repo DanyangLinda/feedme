@@ -1,4 +1,5 @@
 package org.foodie.server.controller;
+
 import java.util.Date;
 import org.foodie.server.service.Photo;
 import org.foodie.server.service.PhotoMetadata;
@@ -12,6 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+/**
+ * 
+ * @author wangfei
+ *
+ */
 
 @RestController
 @RequestMapping("/data")

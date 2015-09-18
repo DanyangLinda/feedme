@@ -12,6 +12,9 @@ import org.apache.log4j.Logger;
  * Meta data of a document from an archive managed by {@link IArchiveService}.
  * 
  * @author Daniel Murygin <daniel.murygin[at]gmail[dot]com>
+ * 
+ * Version for Feedme
+ * @author wangfei 
  */
 public class PhotoMetadata implements Serializable {
     

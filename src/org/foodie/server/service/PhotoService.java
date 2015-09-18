@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
  * A service to save, find and get documents from an archive. 
  * 
  * @author Daniel Murygin <daniel.murygin[at]gmail[dot]com>
+ * Version for feed me
+ * @author wangfei
+ * 
  */
 @Service("archiveService")
 public class PhotoService implements  Serializable {

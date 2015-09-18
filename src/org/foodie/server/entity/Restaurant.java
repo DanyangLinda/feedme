@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Restaurant")
+@Table(name="restaurant")
 public class Restaurant {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

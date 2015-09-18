@@ -54,7 +54,9 @@ a{
 #filter {
   padding-top:12px;
 }
-
+#shops{
+  min-height: 600px;
+}
 .row{
   padding-top: 10px;
   border-bottom: 1px solid #D3D3D3;
@@ -119,7 +121,15 @@ a{
 .dish_detail:hover{
     background-color: #F1F1F1;
 }
-
+.show_dish_detail{
+  text-decoration: underline;
+  font-size: 10px;
+  color: #A8AEB8;
+}
+.show_dish_detail:hover{
+  color: #B2D6E2;
+  cursor: pointer;
+}
 .dish_name{
   font-size: 18px;
   font-size: bold;

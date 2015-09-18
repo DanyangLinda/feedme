@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.foodie.server.entity.Dish;
 import org.foodie.server.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,19 +21,17 @@ public class DishController {
 	private DishService dishService;
 	
 	private static Logger log = Logger.getLogger(UserController.class.getName());
-	
-	
-	
+		
 	@RequestMapping("/newdish")
 	@ResponseBody
-	public String create(@RequestParam("dish")Dish newdish){		
+	public Dish create(@RequestBody()Dish newdish){		
 		try{
 			dishService.create(newdish);
 		}catch(Exception e){
 			log.error(e);
-			return("error!");
+			return null;
 		}
-		return ("success!");
+		return null;
 	}
 	
 	@RequestMapping("/delete")
@@ -60,10 +59,8 @@ public class DishController {
 	
 	@RequestMapping("/query")
 	@ResponseBody
-	public List<Dish> query(/*@RequestParam("shop_id")long shopid*/){
+	public List<Dish> query(@RequestParam("shopId")long shopid){
 		List<Dish> dishes =null;
-		//test data
-		long shopid = 2;
 		try{
 			dishes = dishService.query(shopid);
 		}catch(Exception e){

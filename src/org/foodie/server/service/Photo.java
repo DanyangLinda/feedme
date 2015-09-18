@@ -8,6 +8,8 @@ import java.util.Properties;
  * A document from an archive managed by {@link IArchiveService}.
  * 
  * @author Daniel Murygin <daniel.murygin[at]gmail[dot]com>
+ * Version for Feedme
+ * @author wangfei 
  */
 public class Photo extends PhotoMetadata implements Serializable {
 

@@ -48,8 +48,7 @@ function pwdVal(cpwd){
 
 function validationInfo(disDiv,disInfo){
 	document.getElementById(disDiv).style.display="block";
-	document.getElementById(disDiv).innerHTML=disInfo;	
-	//jQuery("#"+disDiv).html(disInfo);		
+	document.getElementById(disDiv).innerHTML=disInfo; //jQuery("#"+disDiv).html(disInfo);		
 }
 
 /**POST**/
@@ -86,7 +85,6 @@ function signUp() {
 
 /**GET**/
 function signIn() {
-	console.log("enterSignIn");
     var userEmail = jQuery.trim(jQuery("#inputEmail").val());
     var password = jQuery.trim(jQuery("#inputPassword").val());
     if(userEmail!=""&&password!=""){

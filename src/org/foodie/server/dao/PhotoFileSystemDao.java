@@ -34,6 +34,8 @@ import org.springframework.stereotype.Service;
  * The name of the documents folder is the UUID of the document.
  * 
  * @author Daniel Murygin <daniel.murygin[at]gmail[dot]com>
+ * Version for Feedme
+ * @author wangfei 
  */
 @Service("documentDao")
 public class PhotoFileSystemDao  {
