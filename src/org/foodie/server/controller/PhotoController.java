@@ -4,6 +4,7 @@ import java.util.Date;
 import org.foodie.server.service.Photo;
 import org.foodie.server.service.PhotoMetadata;
 import org.foodie.server.service.PhotoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,13 +18,16 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 
  * @author wangfei
+ * @author Danyang Li
  *
  */
 
 @RestController
 @RequestMapping("/data")
 public class PhotoController {
-	PhotoService archiveService = new PhotoService();
+	//PhotoService archiveService = new PhotoService();
+	@Autowired
+	PhotoService archiveService;
 	
 	/**
      * Adds a document to the archive.
@@ -35,15 +39,14 @@ public class PhotoController {
      * @return The meta data of the added document
      */
     @RequestMapping(value = "/img", method = RequestMethod.POST)
-    public @ResponseBody PhotoMetadata handleFileUpload(
-            @RequestParam(value="file", required=true) MultipartFile file ) {
-        
+    @ResponseBody
+    public PhotoMetadata handleFileUpload(@RequestParam("file") MultipartFile file){      
         try {
-        	//@DateTimeFormat(pattern="yyyy-MM-dd"
         	Date date = new Date();
         	String person = "Admin";
             Photo document = new Photo(file.getBytes(), file.getOriginalFilename(), date, person );
-            getArchiveService().save(document);
+            //getArchiveService().save(document);
+            archiveService.save(document);
             return document.getMetadata();
         } catch (RuntimeException e) {
             throw e;
@@ -68,16 +71,17 @@ public class PhotoController {
     	HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.IMAGE_JPEG);
         System.out.println("Input id of image: "+id);
-        byte[] res = getArchiveService().getDocumentFile(id);
+       // byte[] res = getArchiveService().getDocumentFile(id);
+        byte[] res = archiveService.getDocumentFile(id);
         System.out.println("Return result of image: "+res);
         return res;
     }
 
-    public PhotoService getArchiveService() {
+  /*  public PhotoService getArchiveService() {
         return archiveService;
     }
 
     public void setArchiveService(PhotoService archiveService) {
         this.archiveService = archiveService;
-    }
+    }*/
  }

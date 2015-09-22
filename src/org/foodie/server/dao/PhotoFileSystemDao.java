@@ -37,7 +37,7 @@ import org.springframework.stereotype.Service;
  * Version for Feedme
  * @author wangfei 
  */
-@Service("documentDao")
+@Service(/*"documentDao"*/)
 public class PhotoFileSystemDao  {
 
     private static final Logger LOG = Logger.getLogger(PhotoFileSystemDao.class);

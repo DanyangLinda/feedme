@@ -13,23 +13,23 @@ import org.springframework.stereotype.Service;
  * @author Daniel Murygin <daniel.murygin[at]gmail[dot]com>
  * Version for feed me
  * @author wangfei
- * 
+ * @author Danyang Li
  */
-@Service("archiveService")
+@Service()
 public class PhotoService implements  Serializable {
-
     private static final long serialVersionUID = 8119784722798361327L;
     
     @Autowired
-    private PhotoFileSystemDao DocumentDao = new PhotoFileSystemDao();
-
+   // private PhotoFileSystemDao DocumentDao = new PhotoFileSystemDao();
+    private PhotoFileSystemDao documentDao;
     /**
      * Saves a document in the archive.
      * @see org.murygin.archive.service.IArchiveService#save(org.Photo.archive.service.Document)
      */
-    public PhotoMetadata save(Photo document) {
-        getDocumentDao().insert(document); 
-        return document.getMetadata();
+    public void save(Photo document) {
+        //getDocumentDao().insert(document); 
+    	 documentDao.insert(document);
+       // return document.getMetadata();
     }
     
     /**
@@ -55,11 +55,13 @@ public class PhotoService implements  Serializable {
 
 
     public PhotoFileSystemDao getDocumentDao() {
-        return DocumentDao;
+       // return DocumentDao;
+    	return documentDao;
     }
 
     public void setDocumentDao(PhotoFileSystemDao documentDao) {
-        DocumentDao = documentDao;
+        //DocumentDao = documentDao;
+    	this.documentDao=documentDao;
     }
 
 

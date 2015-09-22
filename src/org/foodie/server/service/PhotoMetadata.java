@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
  * 
  * Version for Feedme
  * @author wangfei 
+ * @author Danyang Li
  */
 public class PhotoMetadata implements Serializable {
     

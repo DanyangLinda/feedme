@@ -60,7 +60,7 @@ public class DishController {
 			log.error(e);
 			return new DishInfo(e.toString(),StatusCode.PERSIST_ERROR);
 		}
-		return new DishInfo(updatedDish.getId(),updatedDish.getType());
+		return new DishInfo(updatedDish);
 	}
 	
 	@RequestMapping("/query")
