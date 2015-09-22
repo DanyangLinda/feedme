@@ -17,6 +17,22 @@ public class Restaurant {
 	@Column(name="id")
 	private long id;
 	
+	public String getOpenTimeMorning() {
+		return openTimeMorning;
+	}
+
+	public void setOpenTimeMorning(String openTimeMorning) {
+		this.openTimeMorning = openTimeMorning;
+	}
+
+	public String getOpenTimeAfternoon() {
+		return openTimeAfternoon;
+	}
+
+	public void setOpenTimeAfternoon(String openTimeAfternoon) {
+		this.openTimeAfternoon = openTimeAfternoon;
+	}
+
 	@Column(name="name", nullable=false)
 	private String name;
 	
@@ -34,6 +50,12 @@ public class Restaurant {
 	
 	@Column(name="email")
 	private String email;
+	
+	@Column(name="openTimeMorning")
+	private String openTimeMorning;
+	
+	@Column(name="openTimeAfternoon")
+	private String openTimeAfternoon;
 
 	public Restaurant(){
 		

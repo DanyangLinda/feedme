@@ -11,7 +11,6 @@ public class Infor implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String statusInfo;
 	private Integer statusCode = StatusCode.NORMAL;
-	
 	public Infor() {
 		
 	}

@@ -34,11 +34,33 @@ public class Dish {
 	private String ingredient;
 	
 	@Column(name="price")
-	private String price;
+	private Integer price;
 	
 	@Column(name="discount")
-	private String discount;
+	private Integer discount;
 	
+	@Column(name="flavor")
+	private String flavor;
+	
+	@Column(name="sold")
+	private Integer sold;
+	
+	public String getFlavor() {
+		return flavor;
+	}
+
+	public void setFlavor(String flavor) {
+		this.flavor = flavor;
+	}
+
+	public Integer getSold() {
+		return sold;
+	}
+
+	public void setSold(Integer sold) {
+		this.sold = sold;
+	}
+
 	public Dish(){
 		
 	}
@@ -87,11 +109,11 @@ public class Dish {
 		this.photo = photo;
 	}
 
-	public String getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 
@@ -111,11 +133,11 @@ public class Dish {
 		this.ingredient = ingredient;
 	}
 
-	public String getDiscount() {
+	public Integer getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(String discount) {
+	public void setDiscount(Integer discount) {
 		this.discount = discount;
 	}
 

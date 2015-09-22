@@ -2,6 +2,9 @@ package org.foodie.server.controller;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.foodie.server.entity.Dish;
+import org.foodie.server.infor.DishInfo;
+import org.foodie.server.infor.DishListInfo;
+import org.foodie.server.infor.StatusCode;
 import org.foodie.server.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,50 +27,55 @@ public class DishController {
 		
 	@RequestMapping("/newdish")
 	@ResponseBody
-	public Dish create(@RequestBody()Dish newdish){		
+	public DishInfo create(@RequestBody()Dish newdish){		
 		try{
 			dishService.create(newdish);
 		}catch(Exception e){
 			log.error(e);
-			return null;
+			return new DishInfo(e.toString(),StatusCode.PERSIST_ERROR);
 		}
-		return null;
+		return new DishInfo(newdish.getId());
 	}
 	
 	@RequestMapping("/delete")
 	@ResponseBody
-	public String remove(@RequestParam("dish")Dish removedDish){
+	public DishInfo remove(@RequestParam("dishId")long dishId){
+		Dish removedDish = new Dish(dishId);
 		try{
 			dishService.remove(removedDish);
 		}catch(Exception e){
-			log.error(e);
-			return"error!";
+			return new DishInfo(e.toString(),StatusCode.PERSIST_ERROR);
 		}
-		return("success!");		
+	System.out.println("############ "+dishId);
+		return new DishInfo(dishId);		
 	}
 	
 	@RequestMapping("/update")
 	@ResponseBody
-	public String update(@RequestParam("dish")Dish updatedDish){
+	public DishInfo update(@RequestBody()Dish updatedDish){
 		try{
 			dishService.update(updatedDish);
 		}catch(Exception e){
 			log.error(e);
+			return new DishInfo(e.toString(),StatusCode.PERSIST_ERROR);
 		}
-		return("success!");
+		return new DishInfo(updatedDish.getId(),updatedDish.getType());
 	}
 	
 	@RequestMapping("/query")
 	@ResponseBody
-	public List<Dish> query(@RequestParam("shopId")long shopid){
+	public DishListInfo query(@RequestParam("shopId")long shopid){
 		List<Dish> dishes =null;
 		try{
 			dishes = dishService.query(shopid);
 		}catch(Exception e){
-			log.error(e);
+			return new DishListInfo(e.toString(),StatusCode.PERSIST_ERROR);
+		}
+		if(dishes!=null&&dishes.size()!=0){
+			return new DishListInfo(dishes);
+		}else{
 			return null;
 		}
-		return dishes;
 	}
 	
 

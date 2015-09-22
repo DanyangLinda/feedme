@@ -82,6 +82,17 @@ public class RestaurantController {
 		return null;
 	}
 	
+	@RequestMapping("/allRestaurant")
+	@ResponseBody
+	public List<Restaurant> findall(){
+		List<Restaurant> restaurants;
+		try{
+			restaurants=restaurantService.query();
+		}catch(Exception e){
+			return null;
+		}
+		return restaurants;
+	}
 	@RequestMapping("/query")
 	@ResponseBody
 	public Restaurant query(@RequestParam("id")long id){
