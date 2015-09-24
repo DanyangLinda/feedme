@@ -64,19 +64,21 @@ public class DishController {
 	
 	@RequestMapping("/query")
 	@ResponseBody
-	public DishListInfo query(@RequestParam("shopId")long shopid){
+	public List<Dish> query(@RequestParam("shopId")long shopid){
 		List<Dish> dishes =null;
 		try{
 			dishes = dishService.query(shopid);
 		}catch(Exception e){
-			return new DishListInfo(e.toString(),StatusCode.PERSIST_ERROR);
+//			return new DishListInfo(e.toString(),StatusCode.PERSIST_ERROR);
 		}
 		if(dishes!=null&&dishes.size()!=0){
-			return new DishListInfo(dishes);
+			return  dishes;
 		}else{
 			return null;
 		}
 	}
+	
+	
 	
 
 }
