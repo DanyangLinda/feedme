@@ -98,6 +98,9 @@
             					<td><img src="" alt="photo" id="dPhoto" style="width:120px; height:60px"/></td>
             				</tr>
             				<tr>
+            					<td colspan='2'><input type="file"  disabled="disabled"  id="phFile" name="phFile" onchange="PreviewImage(this)"/></td>
+            				</tr>
+            				<tr>
             					<td>Name:</td>
             					<td><input id="dName"/></td>
             				</tr>
@@ -140,18 +143,18 @@
             			</table>           		
             		</div>   
             	</div> 
-            	<div class="thiCol" style="border: 1px solid red;">
+            	<div id="dPanel" class="thiCol" style="border: 1px solid red; text-align: left;">
             		<label>Dishes</label>
             		<div id="resultDiv4" style="color:red;"></div>
-            		<div>Soup</div>
+            		<div><h5 onclick="dishPanel(this)">Soup</h5></div>
             		<div id="Soup"></div>
-            		<div>Dessert</div>
+            		<div><h5 onclick="dishPanel(this)">Dessert</h5></div>
             		<div id="Dessert"></div>
-            		<div>Staple</div>
+            		<div><h5 onclick="dishPanel(this)">Staple</h5></div>
             		<div id="Staple"></div>
-            		<div>Drink</div>
+            		<div><h5 onclick="dishPanel(this)">Drink</h5></div>
        				<div id="Drinks"></div>
-       				<div>Others</div>
+       				<div><h5 onclick="dishPanel(this)">Others</h5></div>
             		<div id="Others"></div>
             	</div>       
         	</div>            	    	
@@ -160,6 +163,11 @@
     		jQuery(document).ready(function () {
     			loadRestaurants();
         	});
+    		
+    		function dishPanel(par){
+				console.log("Enter dishPanel: "+par);
+    			     jQuery(par).next("div").toggle();
+			}
 		</script>
 	</body>
 </html>

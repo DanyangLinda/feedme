@@ -104,21 +104,19 @@ function updateRestaurant(){
 		restaurant.openTimeMorning=jQuery.trim(jQuery("#om").val());
 		restaurant.openTimeAfternoon=jQuery.trim(jQuery("#oa").val());
 		if(checkPic("apkFile")){
-			console.log("enter to process ajaxFileUpload!");
-			console.log(putData);
 			var url='/restaurants/update';
 			var putData=restaurant;
 			ajaxFileUpload(url, putData, "apkFile");
 		}else{
 			var putData = JSON.stringify(restaurant);
-			restSet("/restaurants/update", PUT_METHOD, putData, renderUpdate,"#resultDiv2");
+			restSet("/restaurants/update", PUT_METHOD, putData, renderUpdateRestaurant,"#resultDiv2");
 		}		
 	}else{
 		alert("no restaurant selected!");
 	}	
 }
 
-function renderUpdate(data){
+function renderUpdateRestaurant(data){
 	jQuery("#resultDiv2").html("success");	
 	jQuery("#CR1").html("");
 	jQuery("#"+restaurantIndex).html(jQuery.trim(jQuery("#name").val()));
@@ -198,7 +196,6 @@ function renderDisplayMenu(data){
 	var dishes=data.dishes;
 	jQuery.each(dishes,function(i,object){
 		var line=dishTemplate(object.id,object.name,object.type,object.price,object.discount,object.flavor,object.ingredient,object.description);
-		console.log("*******"+object.id);
 		jQuery("#"+object.type).append(line);
 	})
 }
@@ -264,16 +261,9 @@ function updateDish(dishId){
 
 function renderUpdateDish(data){
 	if(jQuery("#dish"+data.id).find("select").attr("selectedIndex")!=0){
-		console.log("move");
 		var line=dishTemplate(data.id,data.name,data.type,data.price,data.discount,data.flavor,data.ingredient,data.description);
-		//console.log(line);
 		jQuery("#"+data.type).append(line);
-		//jQuery("#dish"+data.id).remove();
-		//console.log(document.getElementById(data.type));
-		//console.log(document.getElementById("dish"+data.id));
-		//console.log(jQuery("#"+data.type));
 		jQuery("#dish"+data.id).remove();		
-		//console.log(jQuery("#dish"+data.id));
 	}
 	alert("Successfully updated");
 	jQuery("#CR"+data.id).html("");
@@ -285,7 +275,6 @@ function deleteDish(dishId){
 }
 
 function renderDeleteDish(data){
-	console.log("dishID:"+data.id)
 	jQuery("#dish"+data.id).remove();
 	alert("successfully deleted")
 }
@@ -293,7 +282,7 @@ function renderDeleteDish(data){
 function dishTemplate(dishId,name,type,price,discount,flavor,ingredient,description){
 	var line="<table id='dish"+dishId+"' style='border:1px solid #ccc; text-align:left'>"
 					+"<tr>"
-						+"<td rowspan='5'><div style='width:150px; height:130px;border:1px solid #ccc'><img /></div></td>"
+						+"<td rowspan='4'><div style='width:150px; height:130px;border:1px solid #ccc'><img /></div></td>"
 						+"<td>Dish name:</td>"
 						+"<td colspan='3'><input style='width:215px;' readonly='readonly' value='"+name+"' /></td>"
 						+"<td>Type:</td>"
@@ -316,6 +305,7 @@ function dishTemplate(dishId,name,type,price,discount,flavor,ingredient,descript
 						+"<td colspan='5'><textarea rows='2' cols='56' readonly='readonly'>"+description+"</textarea></td>"
 					+"</tr>"
 					+"<tr>"
+						+"<td><input type='file'  disabled='disabled'  id=ph'"+dishId+"' name='ph"+dishId+"' onchange=PreviewImage(this)/></td>"
 						+"<td colspan='3'><div style='color:red;' id='CR"+dishId+"'></div><td>"
 						+"<td><button onclick='editDish("+dishId+")'>Edit</button></td>"
 						+"<td><button onclick='updateDish("+dishId+")'>Apply</button></td>"

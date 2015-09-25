@@ -66,11 +66,9 @@ public class RestaurantController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public Infor update(@RequestParam(value="apkFile",required=false) MultipartFile apkFile, Restaurant restaurant){	
-		System.out.println("*****************Step1: Eenter Update");	
 		if(apkFile!=null){
-			System.out.println("*****************Step2: Enter upload!");
 				try{
-					String path="data/upload/logo";
+					String path="data/logo";
 					String logo = uploadService.uploadImg(apkFile, path);
 					restaurant.setLogo(logo);
 				}catch(Exception e){

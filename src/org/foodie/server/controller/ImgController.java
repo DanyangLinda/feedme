@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/img")
 public class ImgController {
-	@RequestMapping(value="/logo/{logoId}",produces = "image/png")
+	@RequestMapping(value="/{folder:logo|photo}/{logoId}",produces = "image/png")
 	@ResponseBody
-	public byte[] getLogo(@PathVariable("logoId") String id){	
+	public byte[] getLogo(@PathVariable("folder")String folder, @PathVariable("logoId") String id){	
 		try {
-			return FileUtils.readFileToByteArray(new File("data/upload/logo/"+id));
+			return FileUtils.readFileToByteArray(new File("data/"+folder+"/"+id));
 		} catch (IOException e) {
 			return null;
 		}
