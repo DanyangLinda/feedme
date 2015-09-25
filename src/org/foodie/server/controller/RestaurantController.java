@@ -2,17 +2,22 @@ package org.foodie.server.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.foodie.server.entity.Restaurant;
 import org.foodie.server.infor.Infor;
 import org.foodie.server.infor.RestaurantListInfo;
 import org.foodie.server.infor.StatusCode;
 import org.foodie.server.service.RestaurantService;
+import org.foodie.server.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 
@@ -25,6 +30,8 @@ public class RestaurantController {
 	
 	@Autowired
 	private RestaurantService restaurantService;
+	@Autowired
+	private UploadService uploadService;
 	
 	@RequestMapping("/newrestaurant")
 	@ResponseBody
@@ -58,13 +65,22 @@ public class RestaurantController {
 	
 	@RequestMapping("/update")
 	@ResponseBody
-	public Infor update(@RequestBody()Restaurant restaurant){
-		try{
-			restaurantService.update(restaurant);
-		}catch(Exception e){
-			return new Infor(e.toString(),StatusCode.PERSIST_ERROR);
-		}
-		return new Infor();
+	public Infor update(@RequestParam(value="apkFile",required=false) MultipartFile apkFile, Restaurant restaurant){	
+		if(apkFile!=null){
+				try{
+					String path="data/logo";
+					String logo = uploadService.uploadImg(apkFile, path);
+					restaurant.setLogo(logo);
+				}catch(Exception e){
+					System.out.println(e.toString());
+				}
+			}
+			try{
+				restaurantService.update(restaurant);
+			}catch(Exception e){
+				return new Infor(e.toString(),StatusCode.PERSIST_ERROR);
+			}
+		return new Infor();		
 	}
 	
 	@RequestMapping("/restaurantList")
