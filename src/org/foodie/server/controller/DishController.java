@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import org.foodie.server.entity.Dish;
 import org.foodie.server.infor.DishInfo;
 import org.foodie.server.infor.DishListInfo;
-import org.foodie.server.infor.Infor;
 import org.foodie.server.infor.StatusCode;
 import org.foodie.server.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
