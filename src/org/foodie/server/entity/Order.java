@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 public class Order {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="orderId", nullable=false)
 	private long orderId;
 	@Column(name="userId")
 	private long userId;
@@ -25,8 +26,8 @@ public class Order {
 	private long dishId;
 	@Column(name="amount")
 	private Integer amount;
-	@Column(name="price")
-	private Integer price;
+	@Column(name="status")
+	private String status;
 	public long getOrderId() {
 		return orderId;
 	}
@@ -57,11 +58,11 @@ public class Order {
 	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
-	public Integer getPrice() {
-		return price;
+	public String getStatus() {
+		return status;
 	}
-	public void setPrice(Integer price) {
-		this.price = price;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }
