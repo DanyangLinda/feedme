@@ -38,4 +38,9 @@ public class DishServiceImp implements DishService {
 	public List<Dish> query(long shop_id) {
 		return dishDao.findByShopId(shop_id);
 	}
+
+	@Override
+	public Dish queryOne(long dishId) {
+		return dishDao.findOneById(dishId);
+	}
 }	

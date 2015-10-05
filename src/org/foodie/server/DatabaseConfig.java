@@ -47,13 +47,6 @@ public class DatabaseConfig {
     dataSource.setPassword(env.getProperty("db.password"));
     
     //Druid data connection pool configuration
-    
-    
-    
-    
-    
-    
-    
     dataSource.setInitialSize(Integer.parseInt(env.getProperty("Druid.initialSize")));
     dataSource.setMinIdle(Integer.parseInt(env.getProperty("Druid.minIdle")));
     dataSource.setMaxActive(Integer.parseInt(env.getProperty("Druid.maxActive")));

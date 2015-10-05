@@ -15,6 +15,7 @@ import org.springframework.data.repository.CrudRepository;
 public interface DishDao extends CrudRepository<Dish,Long> {
 
 	List<Dish> findByShopId(long shopId);
+	Dish findOneById(long id);
 
 }
 

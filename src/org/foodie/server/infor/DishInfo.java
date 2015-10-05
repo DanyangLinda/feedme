@@ -24,7 +24,12 @@ public class DishInfo extends Infor{
 	}
 	
 	public DishInfo(final long id){
-		
+		this.id=id;
+	}
+	
+	public DishInfo(final long id, final String photo){
+		this.id=id;
+		this.photo=photo;
 	}
 	
 	public DishInfo(final Dish dish){
