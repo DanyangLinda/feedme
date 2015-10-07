@@ -1,85 +1,79 @@
 package org.foodie.server.infor;
 /**
- * 
  * @author Danyang Li
- *
  */
+
+import java.util.List;
+
+import org.foodie.server.entity.Order;
+import org.foodie.server.entity.OrderedDishesView;
+
 public class OrderInfor {
-	private long dishId;
 	private long restaurantId;
 	private long orderId;
 	private long userId;
 	private String status;
-	private String restaurant;
-	private String dish;
-	private Integer price;
-	private Integer amount;
+	private Integer fee;
+	private List<OrderedDishesView> dishes;
 	
-	public OrderInfor(long dishId, long restaurantId, long orderId, long userId, String status, String restaurant, String dish, Integer price, Integer amount){
-		this.dishId=dishId;
-		this.restaurantId=restaurantId;
-		this.orderId=orderId;
-		this.userId=userId;
-		this.status=status;
-		this.restaurant=restaurant;
-		this.dish=dish;
-		this.price=price;
-		this.amount=amount;
+	public OrderInfor(){
+		
 	}
 	
-	public long getDishId() {
-		return dishId;
+	public OrderInfor(Order order){
+		this.restaurantId=order.getShopId();
+		this.orderId=order.getOrderId();
+		this.userId=order.getUserId();
+		this.status=order.getStatus();
+		this.fee=order.getFee();
 	}
-	public void setDishId(long dishId) {
-		this.dishId = dishId;
-	}
+	
+
 	public long getRestaurantId() {
 		return restaurantId;
 	}
+
 	public void setRestaurantId(long restaurantId) {
 		this.restaurantId = restaurantId;
 	}
+
 	public long getOrderId() {
 		return orderId;
 	}
+
 	public void setOrderId(long orderId) {
 		this.orderId = orderId;
 	}
+
 	public long getUserId() {
 		return userId;
 	}
+
 	public void setUserId(long userId) {
 		this.userId = userId;
 	}
+
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getRestaurant() {
-		return restaurant;
+
+	public Integer getFee() {
+		return fee;
 	}
-	public void setRestaurant(String restaurant) {
-		this.restaurant = restaurant;
+
+	public void setFee(Integer fee) {
+		this.fee = fee;
 	}
-	public String getDish() {
-		return dish;
+
+	public List<OrderedDishesView> getDishes() {
+		return dishes;
 	}
-	public void setDish(String dish) {
-		this.dish = dish;
-	}
-	public Integer getPrice() {
-		return price;
-	}
-	public void setPrice(Integer price) {
-		this.price = price;
-	}
-	public Integer getAmount() {
-		return amount;
-	}
-	public void setAmount(Integer amount) {
-		this.amount = amount;
-	}
-	
+
+	public void setDishes(List<OrderedDishesView> dishes) {
+		this.dishes.addAll(dishes);
+	}	
 }

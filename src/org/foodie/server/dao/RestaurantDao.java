@@ -3,12 +3,9 @@ package org.foodie.server.dao;
  * @author Danyang Li
  */
 import java.util.List;
-
 import javax.transaction.Transactional;
-
 import org.foodie.server.entity.Restaurant;
 import org.springframework.data.repository.CrudRepository;
-
 
 @Transactional
 public interface RestaurantDao extends CrudRepository<Restaurant, Long> {

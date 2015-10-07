@@ -1,15 +1,13 @@
 package org.foodie.server.entity;
-import javax.persistence.Column;
 /**
  * @author Danyang Li
  */
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 @Entity
 //@IdClass(value=OrderUnionPK.class)
 @Table(name="order")
@@ -22,10 +20,8 @@ public class Order {
 	private long userId;
 	@Column(name="shopId")
 	private long shopId;
-	@Column(name="dishId")
-	private long dishId;
-	@Column(name="amount")
-	private Integer amount;
+	@Column(name="fee")
+	private Integer fee;
 	@Column(name="status")
 	private String status;
 	public long getOrderId() {
@@ -46,17 +42,11 @@ public class Order {
 	public void setShopId(long shopId) {
 		this.shopId = shopId;
 	}
-	public long getDishId() {
-		return dishId;
+	public Integer getFee() {
+		return fee;
 	}
-	public void setDishId(long dishId) {
-		this.dishId = dishId;
-	}
-	public Integer getAmount() {
-		return amount;
-	}
-	public void setAmount(Integer amount) {
-		this.amount = amount;
+	public void setFee(Integer fee) {
+		this.fee = fee;
 	}
 	public String getStatus() {
 		return status;

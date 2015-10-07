@@ -4,10 +4,9 @@ package org.foodie.server.dao;
  */
 import java.util.List;
 import javax.transaction.Transactional;
-import org.foodie.server.entity.Order;
+import org.foodie.server.entity.OrderedDishesView;
 import org.springframework.data.repository.CrudRepository;
 @Transactional
-public interface OrderDao extends CrudRepository<Order, Long> {
-	Order findOneByOrderId(long orderId);
-	List<Order> findByUserId(long userId);
+public interface OrderedDishesViewDao extends CrudRepository<OrderedDishesView, Long> {
+	List<OrderedDishesView> findByOrderId(long orderId);
 }
