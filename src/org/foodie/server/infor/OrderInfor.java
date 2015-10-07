@@ -3,6 +3,7 @@ package org.foodie.server.infor;
  * @author Danyang Li
  */
 
+import java.util.Date;
 import java.util.List;
 
 import org.foodie.server.entity.Order;
@@ -12,8 +13,14 @@ public class OrderInfor {
 	private long restaurantId;
 	private long orderId;
 	private long userId;
-	private String status;
-	private Integer fee;
+	private long deliverId;
+	private String state;
+	private String paymentStatus;
+	private Integer deliveryFee;
+	private Integer totalPrice;
+	private Date creatTime;
+	private Date deliverTime;
+	private Date finishTime;
 	private List<OrderedDishesView> dishes;
 	
 	public OrderInfor(){
@@ -21,13 +28,18 @@ public class OrderInfor {
 	}
 	
 	public OrderInfor(Order order){
-		this.restaurantId=order.getShopId();
-		this.orderId=order.getOrderId();
+		this.restaurantId=order.getRestaurantId();
+		this.orderId=order.getId();
 		this.userId=order.getUserId();
-		this.status=order.getStatus();
-		this.fee=order.getFee();
+		this.deliverId=order.getDeliverId();
+		this.state=order.getState();
+		this.deliveryFee=order.getDeliveryfee();
+		this.totalPrice=order.getTotalPrice();
+		this.paymentStatus=order.getPaymentStatus();
+		this.creatTime=order.getCreatTime();
+		this.deliverTime=order.getDeliverTime();
+		this.finishTime=order.getFinishTime();
 	}
-	
 
 	public long getRestaurantId() {
 		return restaurantId;
@@ -53,20 +65,68 @@ public class OrderInfor {
 		this.userId = userId;
 	}
 
-	public String getStatus() {
-		return status;
+	public long getDeliverId() {
+		return deliverId;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setDeliverId(long deliverId) {
+		this.deliverId = deliverId;
 	}
 
-	public Integer getFee() {
-		return fee;
+	public String getState() {
+		return state;
 	}
 
-	public void setFee(Integer fee) {
-		this.fee = fee;
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getPaymentStatus() {
+		return paymentStatus;
+	}
+
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
+
+	public Integer getDeliveryFee() {
+		return deliveryFee;
+	}
+
+	public void setDeliveryFee(Integer deliveryFee) {
+		this.deliveryFee = deliveryFee;
+	}
+
+	public Integer getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Integer totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public Date getCreatTime() {
+		return creatTime;
+	}
+
+	public void setCreatTime(Date creatTime) {
+		this.creatTime = creatTime;
+	}
+
+	public Date getDeliverTime() {
+		return deliverTime;
+	}
+
+	public void setDeliverTime(Date deliverTime) {
+		this.deliverTime = deliverTime;
+	}
+
+	public Date getFinishTime() {
+		return finishTime;
+	}
+
+	public void setFinishTime(Date finishTime) {
+		this.finishTime = finishTime;
 	}
 
 	public List<OrderedDishesView> getDishes() {
@@ -74,6 +134,7 @@ public class OrderInfor {
 	}
 
 	public void setDishes(List<OrderedDishesView> dishes) {
-		this.dishes.addAll(dishes);
-	}	
+		this.dishes = dishes;
+	}
+	
 }

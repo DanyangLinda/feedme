@@ -1,4 +1,6 @@
 package org.foodie.server.entity;
+import java.util.Date;
+
 /**
  * @author Danyang Li
  */
@@ -10,25 +12,38 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
 //@IdClass(value=OrderUnionPK.class)
-@Table(name="order")
+@Table(name="orders")
 public class Order {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="orderId", nullable=false)
-	private long orderId;
+	@Column(name="id", nullable=false)
+	private long id;
 	@Column(name="userId")
 	private long userId;
-	@Column(name="shopId")
-	private long shopId;
-	@Column(name="fee")
-	private Integer fee;
-	@Column(name="status")
-	private String status;
-	public long getOrderId() {
-		return orderId;
+	@Column(name="restaurantId")
+	private long restaurantId;
+	@Column(name="deliverId")
+	private long deliverId;
+	@Column(name="totalPrice")
+	private Integer totalPrice;
+	@Column(name="deliveryFee")
+	private Integer deliveryfee;
+	@Column(name="paymentStatus")
+	private String paymentStatus;
+	@Column(name="state")
+	private String state;
+	@Column(name="creatTime")
+	private Date creatTime;
+	@Column(name="deliverTime")
+	private Date deliverTime;
+	@Column(name="finishTime")
+	private Date finishTime;
+	
+	public long getId() {
+		return id;
 	}
-	public void setOrderId(long orderId) {
-		this.orderId = orderId;
+	public void setId(long id) {
+		this.id = id;
 	}
 	public long getUserId() {
 		return userId;
@@ -36,23 +51,59 @@ public class Order {
 	public void setUserId(long userId) {
 		this.userId = userId;
 	}
-	public long getShopId() {
-		return shopId;
+	public long getRestaurantId() {
+		return restaurantId;
 	}
-	public void setShopId(long shopId) {
-		this.shopId = shopId;
+	public void setRestaurantId(long restaurantId) {
+		this.restaurantId = restaurantId;
 	}
-	public Integer getFee() {
-		return fee;
+	public long getDeliverId() {
+		return deliverId;
 	}
-	public void setFee(Integer fee) {
-		this.fee = fee;
+	public void setDeliverId(long deliverId) {
+		this.deliverId = deliverId;
 	}
-	public String getStatus() {
-		return status;
+	public Integer getTotalPrice() {
+		return totalPrice;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setTotalPrice(Integer totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public Integer getDeliveryfee() {
+		return deliveryfee;
+	}
+	public void setDeliveryfee(Integer deliveryfee) {
+		this.deliveryfee = deliveryfee;
+	}
+	public String getPaymentStatus() {
+		return paymentStatus;
+	}
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public Date getDeliverTime() {
+		return deliverTime;
+	}
+	public void setDeliverTime(Date deliverTime) {
+		this.deliverTime = deliverTime;
+	}
+	public Date getFinishTime() {
+		return finishTime;
+	}
+	public void setFinishTime(Date finishTime) {
+		this.finishTime = finishTime;
+	}
+	public Date getCreatTime() {
+		return creatTime;
+	}
+	public void setCreatTime(Date creatTime) {
+		this.creatTime = creatTime;
 	}
 
 }

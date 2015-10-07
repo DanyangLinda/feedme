@@ -24,7 +24,9 @@ public class OrderedDish {
 	private long dishId;
 	@Column(name="amount")
 	private Integer amount;
-	
+	@Column(name="price")
+	private Integer price;
+
 	public long getId() {
 		return id;
 	}
@@ -48,5 +50,11 @@ public class OrderedDish {
 	}
 	public void setAmount(Integer amount) {
 		this.amount = amount;
+	}
+	public Integer getPrice() {
+		return price;
+	}
+	public void setPrice(Integer price) {
+		this.price = price;
 	}
 }
