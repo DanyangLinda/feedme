@@ -26,6 +26,15 @@ public class OrderedDishesView {
 	private String dish;
 	@Column(name="price")
 	private Integer price;
+	@Column(name="photo")
+	private String photo;
+	
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 
 	public long getOrderId() {
 		return orderId;

@@ -31,7 +31,7 @@ public class OrderServiceImp implements OrderService{
 		for(Order o : orders){
 			OrderInfor orderInfor=new OrderInfor(o);
 			List<OrderedDishesView> dishes=null;
-			dishes = orderedDishesViewDao.findByOrderId(o.getOrderId());
+			dishes = orderedDishesViewDao.findByOrderId(o.getId());
 			orderInfor.setDishes(dishes);
 			orderInfors.add(orderInfor);
 		}
@@ -43,7 +43,7 @@ public class OrderServiceImp implements OrderService{
 		Order order = order2dishes.getOrder();
 		List<OrderedDish>dishes = order2dishes.getDishes();
 		orderDao.save(order);
-		long orderId=order.getOrderId();
+		long orderId=order.getId();
 		for(OrderedDish od:dishes){
 			od.setOrderId(orderId);
 		}	
