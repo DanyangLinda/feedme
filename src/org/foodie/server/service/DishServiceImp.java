@@ -1,5 +1,7 @@
 package org.foodie.server.service;
-
+/**
+ * @author Danyang Li
+ */
 import java.util.List;
 
 import org.foodie.server.dao.DishDao;
@@ -7,11 +9,6 @@ import org.foodie.server.entity.Dish;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-/**
- * 
- * @author Danyang Li
- *
- */
 @Component
 public class DishServiceImp implements DishService {
 	@Autowired
@@ -37,5 +34,10 @@ public class DishServiceImp implements DishService {
 	@Override
 	public List<Dish> query(long shop_id) {
 		return dishDao.findByShopId(shop_id);
+	}
+
+	@Override
+	public Dish queryOne(long dishId) {
+		return dishDao.findOneById(dishId);
 	}
 }	

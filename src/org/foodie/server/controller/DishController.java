@@ -5,12 +5,14 @@ import org.foodie.server.entity.Dish;
 import org.foodie.server.infor.DishInfo;
 import org.foodie.server.infor.StatusCode;
 import org.foodie.server.service.DishService;
+import org.foodie.server.service.ImgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 /**
  * 
  * @author Danyang Li
@@ -21,44 +23,68 @@ import org.springframework.web.bind.annotation.RestController;
 public class DishController {
 	@Autowired
 	private DishService dishService;
+	@Autowired
+	private ImgService imgService;
 	
-	private static Logger log = Logger.getLogger(UserController.class.getName());
-		
+	private static Logger log = Logger.getLogger(UserController.class.getName());		
+	
 	@RequestMapping("/newdish")
 	@ResponseBody
-	public DishInfo create(@RequestBody()Dish newdish){		
+	public DishInfo create(@RequestParam(value="phFile", required=false)MultipartFile phFile, Dish dish){
+		if(phFile!=null){
+			try{
+				String path="data/photo";
+				String photo=imgService.uploadImg(phFile, path);
+				dish.setPhoto(photo);
+			}catch(Exception e){
+				System.out.println(e.toString());
+			}
+		}
 		try{
-			dishService.create(newdish);
+			dishService.create(dish);
 		}catch(Exception e){
-			log.error(e);
 			return new DishInfo(e.toString(),StatusCode.PERSIST_ERROR);
 		}
-		return new DishInfo(newdish.getId());
+		return new DishInfo(dish.getId(),dish.getPhoto());
 	}
 	
 	@RequestMapping("/delete")
 	@ResponseBody
 	public DishInfo remove(@RequestParam("dishId")long dishId){
-		Dish removedDish = new Dish(dishId);
+		Dish removedDish = dishService.queryOne(dishId);
 		try{
 			dishService.remove(removedDish);
 		}catch(Exception e){
 			return new DishInfo(e.toString(),StatusCode.PERSIST_ERROR);
 		}
-	System.out.println("############ "+dishId);
+		System.out.println("!!!!!!!!!!!!!! delete photo: "+removedDish.getPhoto());
+		String imgPath="data/photo/"+removedDish.getPhoto();
+		imgService.deleteImg(imgPath);
 		return new DishInfo(dishId);		
 	}
 	
 	@RequestMapping("/update")
 	@ResponseBody
-	public DishInfo update(@RequestBody()Dish updatedDish){
+	public DishInfo update(@RequestParam(value="pho",required=false)MultipartFile phFile,Dish updatedDish){
+		if(phFile!=null){
+			try{
+				String path="data/photo";
+				String photo=imgService.uploadImg(phFile, path);
+				String oldImgpath="data/photo/"+dishService.queryOne(updatedDish.getId()).getPhoto();
+				imgService.deleteImg(oldImgpath);
+				updatedDish.setPhoto(photo);
+			}catch(Exception e){
+				System.out.println(e.toString());
+			}
+		}
 		try{
 			dishService.update(updatedDish);
 		}catch(Exception e){
 			log.error(e);
 			return new DishInfo(e.toString(),StatusCode.PERSIST_ERROR);
 		}
-		return new DishInfo(updatedDish);
+		DishInfo dishInfo=new DishInfo(updatedDish);
+		return dishInfo;
 	}
 	
 	@RequestMapping("/query")
@@ -76,8 +102,4 @@ public class DishController {
 			return null;
 		}
 	}
-	
-	
-	
-
 }
