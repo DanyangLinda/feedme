@@ -2,8 +2,6 @@ package org.foodie.server.controller;
 
 import java.io.IOException;
 import java.util.List;
-
-
 import org.foodie.server.entity.Restaurant;
 import org.foodie.server.infor.Infor;
 import org.foodie.server.infor.RestaurantInfo;
