@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @IdClass(value=ODVUniKey.class)
-@Table(name="orderedDishesView")
+@Table(name="ordereddishesview")
 public class OrderedDishesView {
 	@Id
 	@Column(name="orderId")
@@ -74,6 +74,5 @@ public class OrderedDishesView {
 
 	public void setPrice(Integer price) {
 		this.price = price;
-	}
-	
+	}	
 }
