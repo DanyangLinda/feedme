@@ -1,9 +1,8 @@
 package org.foodie.server.entity;
-import java.util.Date;
-
 /**
  * @author Danyang Li
  */
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
-//@IdClass(value=OrderUnionPK.class)
 @Table(name="orders")
 public class Order {
 	@Id
@@ -24,6 +22,8 @@ public class Order {
 	private long restaurantId;
 	@Column(name="deliverId")
 	private long deliverId;
+	@Column(name="addressId")
+	private long addressId;
 	@Column(name="totalPrice")
 	private Integer totalPrice;
 	@Column(name="deliveryFee")
@@ -105,5 +105,10 @@ public class Order {
 	public void setCreatTime(Date creatTime) {
 		this.creatTime = creatTime;
 	}
-
+	public long getAddressId() {
+		return addressId;
+	}
+	public void setAddressId(long addressId) {
+		this.addressId = addressId;
+	}
 }

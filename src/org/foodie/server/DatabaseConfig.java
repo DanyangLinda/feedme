@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -38,8 +41,8 @@ public class DatabaseConfig {
    */
   @Bean
   public DataSource dataSource() {
-    //DriverManagerDataSource dataSource = new DriverManagerDataSource();
-	  DruidDataSource dataSource = new DruidDataSource();
+    DriverManagerDataSource dataSource = new DriverManagerDataSource();
+	  //DruidDataSource dataSource = new DruidDataSource();
 	  
     dataSource.setDriverClassName(env.getProperty("db.driver"));
     dataSource.setUrl(env.getProperty("db.url"));
@@ -47,12 +50,27 @@ public class DatabaseConfig {
     dataSource.setPassword(env.getProperty("db.password"));
     
     //Druid data connection pool configuration
-    dataSource.setInitialSize(Integer.parseInt(env.getProperty("Druid.initialSize")));
+   /* dataSource.setInitialSize(Integer.parseInt(env.getProperty("Druid.initialSize")));
     dataSource.setMinIdle(Integer.parseInt(env.getProperty("Druid.minIdle")));
     dataSource.setMaxActive(Integer.parseInt(env.getProperty("Druid.maxActive")));
-    dataSource.setPoolPreparedStatements(Boolean.parseBoolean(env.getProperty("Druid.poolPreparedStatements")));
+    dataSource.setPoolPreparedStatements(Boolean.parseBoolean(env.getProperty("Druid.poolPreparedStatements")));*/
     
     return dataSource;
+  }
+  
+  @Bean
+  public LocalSessionFactoryBean sessionFactory(){
+	  //AnnotationSessionFactoryBean sessionFactory=new AnnotationSessionFactoryBean();
+	  LocalSessionFactoryBean sessionFactory=new LocalSessionFactoryBean();
+	  sessionFactory.setDataSource(dataSource);
+	  sessionFactory.setPackagesToScan(env.getProperty("entitymanager.packagesToScan"));
+	  //sessionFactory.setPackagesToScan(env.getProperty("entitymanager.packagesToScan"));
+	  Properties additionalProperties = new Properties();
+	  additionalProperties.put( "hibernate.dialect", env.getProperty("hibernate.dialect"));
+	  additionalProperties.put( "hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+	  additionalProperties.put( "hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+	  sessionFactory.setHibernateProperties(additionalProperties);  
+	  return sessionFactory;
   }
 
   /**
