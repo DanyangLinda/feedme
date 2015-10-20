@@ -1,46 +1,58 @@
 package org.foodie.server.controller;
-/**
- * @author Danyang Li
- */
+
 import java.util.List;
-import org.foodie.server.entity.UserAddress;
-import org.foodie.server.infor.Infor;
-import org.foodie.server.infor.StatusCode;
-import org.foodie.server.service.UserAddressService;
+
+import org.foodie.server.entity.Building;
+import org.foodie.server.entity.Street;
+import org.foodie.server.entity.Suburb;
+import org.foodie.server.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/userAddress")
+@RequestMapping("/address")
 public class AddressController {
-	@Autowired
-	private UserAddressService uaService;
-	@RequestMapping("/newAddress")
+	@Autowired 
+	private AddressService addressService;
+	
+	@RequestMapping("querySuburb")
 	@ResponseBody
-	public Infor create(@RequestBody()UserAddress ua){
+	public List<Suburb> querySuburb(@RequestParam("stateId") long stateId){
+		List<Suburb> suburbs=null;
 		try{
-			uaService.createOne(ua);
-		}catch(Exception e){
+			suburbs=addressService.querySuburbs(stateId);
+		}catch (Exception e){
 			System.out.println(e.toString());
-			return new Infor(e.toString(),StatusCode.PERSIST_ERROR);
+			return null;
 		}
-		return new Infor();
+		return suburbs;
 	}
 	
-	@RequestMapping("/queryUserAddress")
+	@RequestMapping("queryStreat")
 	@ResponseBody
-	public List<UserAddress> query(@RequestParam("userId")long userId){
-		List<UserAddress> uas=null;
+	public List<Street> queryStreat(@RequestParam("suburbId")long suburbId){
+		List<Street> streats=null;
 		try{
-			uas=uaService.query(userId);
+			streats=addressService.queryStreats(suburbId);
 		}catch(Exception e){
 			System.out.println(e.toString());
 			return null;
 		}
-		return uas;
+		return streats;
 	}
+	
+	public List<Building> queryBuilding(@RequestParam("streatId")long streateId){
+		List<Building> buildings=null;
+		try{
+			buildings=addressService.queryBuildings(streateId);
+		}catch(Exception e){
+			System.out.println(e.toString());
+			return null;
+		}
+		return buildings;
+	}
+
 }
