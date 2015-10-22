@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
  *
  */
 @RestController
-@CrossOrigin()
+//@CrossOrigin()
 @RequestMapping("/restaurants")
 public class RestaurantController {	
 	@Autowired
@@ -68,6 +68,7 @@ public class RestaurantController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public Infor update(@RequestParam(value="apkFile",required=false) MultipartFile apkFile, Restaurant restaurant){	
+		System.out.println("**********");
 		if(apkFile!=null){
 				try{
 					String path="data/logo";
