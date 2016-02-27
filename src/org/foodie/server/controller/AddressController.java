@@ -7,12 +7,14 @@ import org.foodie.server.entity.Street;
 import org.foodie.server.entity.Suburb;
 import org.foodie.server.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin()
 @RequestMapping("/address")
 public class AddressController {
 	@Autowired 

@@ -7,6 +7,7 @@ import org.foodie.server.infor.StatusCode;
 import org.foodie.server.service.DishService;
 import org.foodie.server.service.ImgService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
  *
  */
 @RestController
+@CrossOrigin()
 @RequestMapping("/dishes")
 public class DishController {
 	@Autowired
