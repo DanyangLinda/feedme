@@ -55,6 +55,7 @@ public class GroupOrderServiceImp implements GroupOrderService {
 		int ret2=gDao.updateFee(sharedFee, gId);
 		System.out.println("Update  members finished: "+ret);
 		System.out.println("Update credits finished: "+ret2);
+		System.out.println(gDao.countMember(gId));
 	}
 
 	@Override

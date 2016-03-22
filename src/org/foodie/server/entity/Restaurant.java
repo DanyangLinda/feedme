@@ -56,6 +56,9 @@ public class Restaurant {
 	
 	@Column(name="openTimeAfternoon")
 	private String openTimeAfternoon;
+	
+	@Column(name="checkin")
+	private Boolean checkin;
 
 	public Restaurant(){
 		
@@ -120,4 +123,13 @@ public class Restaurant {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public Boolean getCheckin() {
+		return checkin;
+	}
+
+	public void setCheckin(Boolean checkin) {
+		this.checkin = checkin;
+	}
+	
 }

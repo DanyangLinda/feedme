@@ -2,6 +2,7 @@ package org.foodie.server.controller;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.foodie.server.entity.Dish;
+import org.foodie.server.entity.DishLogView;
 import org.foodie.server.infor.DishInfo;
 import org.foodie.server.infor.StatusCode;
 import org.foodie.server.service.DishService;
@@ -91,12 +92,13 @@ public class DishController {
 	
 	@RequestMapping("/query")
 	@ResponseBody
-	public List<Dish> query(@RequestParam("shopId")long shopid){
-		List<Dish> dishes =null;
+	public List<DishLogView> query(@RequestParam("shopId")long shopid){
+		List<DishLogView> dishes =null;
 		try{
 			dishes = dishService.query(shopid);
 		}catch(Exception e){
 //			return new DishListInfo(e.toString(),StatusCode.PERSIST_ERROR);
+			System.out.print(e.toString());
 		}
 		if(dishes!=null&&dishes.size()!=0){
 			return  dishes;

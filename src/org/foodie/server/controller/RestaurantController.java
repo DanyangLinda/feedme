@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
  *
  */
 @RestController
-@CrossOrigin()
+//@CrossOrigin()
 @RequestMapping("/restaurants")
 public class RestaurantController {	
 	@Autowired
