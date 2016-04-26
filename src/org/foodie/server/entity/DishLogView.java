@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 @Component
+
 //@Entity
 //@IdClass(value=DishLogUniKey.class)
 //@Table(name="currentavailabledish")
@@ -87,5 +88,78 @@ public class DishLogView {
 	public void setAvailable(Boolean available) {
 		this.available = available;
 	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+	public String getIngredient() {
+		return ingredient;
+	}
+
+	public void setIngredient(String ingredient) {
+		this.ingredient = ingredient;
+	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+
+	public Integer getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Integer discount) {
+		this.discount = discount;
+	}
+
+	public String getFlavor() {
+		return flavor;
+	}
+
+	public void setFlavor(String flavor) {
+		this.flavor = flavor;
+	}
+
+	public Integer getSold() {
+		return sold;
+	}
+
+	public void setSold(Integer sold) {
+		this.sold = sold;
+	}
+	
 }
 

@@ -11,6 +11,6 @@ public interface DishService {
 	public void create(Dish newDish);
 	public void remove(Dish removedDish);
 	public void update(Dish updatedDish);
-	public List<DishLogView> query(long shop_id);
+	public List<Dish> query(long shop_id);
 	public Dish queryOne(long dishId);
 }

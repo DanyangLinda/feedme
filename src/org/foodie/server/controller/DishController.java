@@ -92,10 +92,11 @@ public class DishController {
 	
 	@RequestMapping("/query")
 	@ResponseBody
-	public List<DishLogView> query(@RequestParam("shopId")long shopid){
-		List<DishLogView> dishes =null;
+	public List<Dish> query(@RequestParam("shopId")long shopid){
+		List<Dish> dishes =null;
 		try{
 			dishes = dishService.query(shopid);
+			System.out.print("\n\n#######################\n\n");
 		}catch(Exception e){
 //			return new DishListInfo(e.toString(),StatusCode.PERSIST_ERROR);
 			System.out.print(e.toString());

@@ -36,10 +36,10 @@ public class DishServiceImp implements DishService {
 	}
 
 	@Override
-	public List<DishLogView> query(long shop_id) {
+	public List<Dish> query (long shop_id) {
 		//return dishDao.findByShopId(shop_id);
-		//return dishLogDao.getAvailableDishes(shop_id);
-		return null;
+		return dishLogDao.getAvailableDishes(shop_id);
+		//return null;
 	}
 
 	@Override
