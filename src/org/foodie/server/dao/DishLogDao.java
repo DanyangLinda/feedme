@@ -1,5 +1,6 @@
 package org.foodie.server.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -9,6 +10,7 @@ import org.foodie.server.entity.Dish;
 import org.foodie.server.entity.DishLog;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -22,7 +24,7 @@ public class DishLogDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Dish> getAvailableDishes(long restaurantId){
-		String hql="select a from Dish a, DishLog b where a.dishId = b.dishId and b.available = 1 and  b.dat = current_date() and b.restaurantId ="+restaurantId+" and a.shopId="+restaurantId;
+		String hql="select a from Dish a, DishLog b where a.id = b.dishId and b.available = 1 and  b.dat = current_date() and b.restaurantId ="+restaurantId+" and a.shopId="+restaurantId;
 		Session session = sessionFactory.getCurrentSession();
 		return (List<Dish>)session.createQuery(hql).list();
 	}
@@ -31,7 +33,10 @@ public class DishLogDao {
 	public List<DishLogView> getYestodayLog(long restaurantId){
 		String hql = "select a.id, a.shopId, a.name, a.type, a.description, a.price, a.photo, a.ingredient, a.discount, a.sold, a.flavor, b.available from Dish as a, DishLog as b where a.id = b.dishId and b.dat = SUBDATE(CURDATE(),1) and b.restaurantId="+restaurantId;
 		Session session = sessionFactory.getCurrentSession();
-		return (List<DishLogView>)session.createQuery(hql).list();
+		return  (List<DishLogView>)session.createQuery(hql).list();
+		
+//		.setResultTransformer(Transformers.aliasToBean(MessageExtDto.class));
+		
 	}
 	
 	public void saveTodayLog(List<DishLog> log){

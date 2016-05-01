@@ -22,11 +22,12 @@ public class CheckinController {
 	@Autowired
 	private RestaurantCheckinService restaurantCheckinService;
 	
-	@RequestMapping("checkin")
+	@RequestMapping("/checkin")
 	@ResponseBody
 	public List<DishLogView> queryMenu(@RequestParam("restaurantId")long restaurantId){
 		List<DishLogView> dishes=null;
 		try{
+			System.out.println("/restaurant/checkin/?restaurantId="+restaurantId);
 			dishes=restaurantCheckinService.queryYesterdayLog(restaurantId);
 		}catch(Exception e){
 			System.out.println(e.toString());
@@ -34,7 +35,7 @@ public class CheckinController {
 		return dishes;
 	}
 	
-	@RequestMapping("refreshMenu")
+	@RequestMapping("/refreshMenu")
 	@ResponseBody
 	public Infor refreshMenu(@RequestBody() List<DishLog> dishlog){
 		try{
