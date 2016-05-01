@@ -51,6 +51,9 @@ public class User {
 
   @Column(name="title")
   private String title;
+  
+  @Column(name="machineCode")
+  private String machineCode;
 
   // ------------------------
   // PUBLIC METHODS
@@ -70,9 +73,17 @@ public class User {
     this.password = password;
     this.title = title;
   }
-
   
-  public String getFirstname() {
+  
+  public String getMachineCode() {
+	return machineCode;
+}
+
+public void setMachineCode(String machineCode) {
+	this.machineCode = machineCode;
+}
+
+public String getFirstname() {
 	return firstname;
 }
 

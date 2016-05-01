@@ -16,22 +16,6 @@ public class Restaurant {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private long id;
-	
-	public String getOpenTimeMorning() {
-		return openTimeMorning;
-	}
-
-	public void setOpenTimeMorning(String openTimeMorning) {
-		this.openTimeMorning = openTimeMorning;
-	}
-
-	public String getOpenTimeAfternoon() {
-		return openTimeAfternoon;
-	}
-
-	public void setOpenTimeAfternoon(String openTimeAfternoon) {
-		this.openTimeAfternoon = openTimeAfternoon;
-	}
 
 	@Column(name="name", nullable=false)
 	private String name;
@@ -59,11 +43,24 @@ public class Restaurant {
 	
 	@Column(name="checkin")
 	private Boolean checkin;
+	
+	@Column(name="password")
+	private String password;
 
 	public Restaurant(){
 		
 	}
 	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
 	public Restaurant(long id){
 		this.id=id;
 	}
@@ -130,6 +127,22 @@ public class Restaurant {
 
 	public void setCheckin(Boolean checkin) {
 		this.checkin = checkin;
+	}
+	
+	public String getOpenTimeMorning() {
+		return openTimeMorning;
+	}
+
+	public void setOpenTimeMorning(String openTimeMorning) {
+		this.openTimeMorning = openTimeMorning;
+	}
+
+	public String getOpenTimeAfternoon() {
+		return openTimeAfternoon;
+	}
+
+	public void setOpenTimeAfternoon(String openTimeAfternoon) {
+		this.openTimeAfternoon = openTimeAfternoon;
 	}
 	
 }

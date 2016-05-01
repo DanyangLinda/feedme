@@ -18,6 +18,8 @@ public interface RestaurantDao extends CrudRepository<Restaurant, Long> {
   public List<Restaurant> findAll();
 
   public Restaurant findById(long id);
+  
+  public Restaurant findByEmail(String email);
    
 
 } // class UserDao

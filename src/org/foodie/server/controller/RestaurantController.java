@@ -2,6 +2,9 @@ package org.foodie.server.controller;
 
 import java.io.IOException;
 import java.util.List;
+
+import org.foodie.server.entity.DishLog;
+import org.foodie.server.entity.DishLogView;
 import org.foodie.server.entity.Restaurant;
 import org.foodie.server.infor.Infor;
 import org.foodie.server.infor.RestaurantInfo;
@@ -9,8 +12,10 @@ import org.foodie.server.infor.RestaurantListInfo;
 import org.foodie.server.infor.StatusCode;
 import org.foodie.server.service.RestaurantService;
 import org.foodie.server.service.ImgService;
+import org.foodie.server.service.RestaurantCheckinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,13 +28,53 @@ import org.springframework.web.multipart.MultipartFile;
  *
  */
 @RestController
-//@CrossOrigin()
+@CrossOrigin()
 @RequestMapping("/restaurants")
 public class RestaurantController {	
 	@Autowired
 	private RestaurantService restaurantService;
 	@Autowired
 	private ImgService imgService;
+	@Autowired
+	private RestaurantCheckinService restaurantCheckinService;
+	
+	@RequestMapping("/checkin")
+	@ResponseBody
+	public List<DishLogView> queryMenu(@RequestParam("restaurantId")long restaurantId){
+		List<DishLogView> dishes=null;
+		try{
+			dishes=restaurantCheckinService.queryYesterdayLog(restaurantId);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return dishes;
+	}
+	
+	@RequestMapping("/refreshMenu")
+	@ResponseBody
+	public Infor refreshMenu(@RequestBody() List<DishLog> dishlog){
+		try{
+			restaurantCheckinService.saveTodayLog(dishlog);
+		}catch(Exception e){
+			System.out.println(e.toString());
+			return new Infor(e.toString(),StatusCode.PERSIST_ERROR);
+		}
+		return new Infor();
+	}
+	
+	@RequestMapping("/login")
+	@ResponseBody
+	public Restaurant getRestaurant(@RequestParam("email")String email, @RequestParam("pwd")String pwd){
+		try{
+			  final Restaurant restaurant=restaurantService.queryByEmail(email.trim());
+			  if(restaurant!=null&&restaurant.getPassword().equals(pwd)){
+				  return restaurant;
+			  }
+		  }catch(Exception e){
+			  System.out.println(e.toString());
+		  }	
+		return null;
+	}
 	
 	@RequestMapping("/newrestaurant")
 	@ResponseBody

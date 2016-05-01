@@ -97,7 +97,6 @@ public class DishController {
 		try{
 			dishes = dishService.query(shopid);
 		}catch(Exception e){
-//			return new DishListInfo(e.toString(),StatusCode.PERSIST_ERROR);
 			System.out.print(e.toString());
 		}
 		if(dishes!=null&&dishes.size()!=0){
