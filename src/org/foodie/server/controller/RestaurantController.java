@@ -53,6 +53,9 @@ public class RestaurantController {
 	@RequestMapping("/refreshMenu")
 	@ResponseBody
 	public Infor refreshMenu(@RequestBody() List<DishLog> dishlog){
+		DishLog first = dishlog.get(0);
+		System.out.println("DishLog\n"+first.getDish_id()+"\t"+first.getRestaurant_id()+"\t"+first.getDat());
+		
 		try{
 			restaurantCheckinService.saveTodayLog(dishlog);
 		}catch(Exception e){

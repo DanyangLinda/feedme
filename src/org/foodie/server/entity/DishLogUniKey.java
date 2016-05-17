@@ -15,7 +15,7 @@ public class DishLogUniKey implements Serializable{
 	@Column
 	private Date dat;
 	@Column
-	private long dishId;
+	private long dish_id;
 	
 	public Date getDat() {
 		return dat;
@@ -23,18 +23,19 @@ public class DishLogUniKey implements Serializable{
 	public void setDat(Date dat) {
 		this.dat = dat;
 	}
-	public long getDishId() {
-		return dishId;
-	}
-	public void setDishId(long dishId) {
-		this.dishId = dishId;
-	}
+
 	
+	public long getDish_id() {
+		return dish_id;
+	}
+	public void setDish_id(long dish_id) {
+		this.dish_id = dish_id;
+	}
 	@Override
 	public boolean equals(Object o){
 		if(o instanceof DishLogUniKey){
 			DishLogUniKey pk = (DishLogUniKey) o;
-			if(this.dat==pk.dat && this.dishId==pk.dishId){
+			if(this.dat==pk.dat && this.dish_id==pk.dish_id){
 				return true;
 			}
 		}

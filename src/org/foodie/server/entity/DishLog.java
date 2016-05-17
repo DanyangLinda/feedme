@@ -17,11 +17,11 @@ public class DishLog {
 	private Date dat;
 	
 	@Id
-	@Column(name="dishId", nullable=false)
-	private long dishId;
+	@Column(name="dish_id", nullable=false)
+	private long dish_id;
 	
-	@Column(name="restaurantId", nullable=false)
-	private long restaurantId;
+	@Column(name="restaurant_id", nullable=false)
+	private long restaurant_id;
 	
 	@Column(name="available", nullable=false)
 	private Boolean available;
@@ -34,20 +34,22 @@ public class DishLog {
 		this.dat = dat;
 	}
 
-	public long getDishId() {
-		return dishId;
+	
+
+	public long getDish_id() {
+		return dish_id;
 	}
 
-	public void setDishId(long dishId) {
-		this.dishId = dishId;
+	public void setDish_id(long dish_id) {
+		this.dish_id = dish_id;
 	}
 
-	public long getRestaurantId() {
-		return restaurantId;
+	public long getRestaurant_id() {
+		return restaurant_id;
 	}
 
-	public void setRestaurantId(long restaurantId) {
-		this.restaurantId = restaurantId;
+	public void setRestaurant_id(long restaurant_id) {
+		this.restaurant_id = restaurant_id;
 	}
 
 	public Boolean getAvailable() {
