@@ -12,5 +12,6 @@ public interface DishService {
 	public void remove(Dish removedDish);
 	public void update(Dish updatedDish);
 	public List<Dish> query(long shop_id);
+	public List<Dish> query_all(long shop_id);
 	public Dish queryOne(long dishId);
 }

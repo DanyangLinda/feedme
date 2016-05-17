@@ -106,4 +106,21 @@ public class DishController {
 			return null;
 		}
 	}
+	
+	@RequestMapping("/queryAll")
+	@ResponseBody
+	public List<Dish> queryAll(@RequestParam("shopId")long shopid){
+		List<Dish> dishes =null;
+		try{
+			dishes = dishService.query_all(shopid);
+			System.out.print("\n\n#######################\n\n");
+		}catch(Exception e){
+			System.out.print(e.toString());
+		}
+		if(dishes!=null&&dishes.size()!=0){
+			return  dishes;
+		}else{
+			return null;
+		}
+	}
 }

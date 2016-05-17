@@ -1,6 +1,9 @@
 package org.foodie.server.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -8,19 +11,24 @@ import javax.transaction.Transactional;
 import org.foodie.server.entity.DishLogView;
 import org.foodie.server.entity.Dish;
 import org.foodie.server.entity.DishLog;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
+
+import javassist.bytecode.Descriptor.Iterator;
 
 @Component
 @Transactional
 public class DishLogDao {
 	@Autowired
 	private SessionFactory sessionFactory;
+	@Autowired
+	private DishDao dishDao;
 	
 	@SuppressWarnings("unchecked")
 	public List<Dish> getAvailableDishes(long restaurantId){
@@ -29,18 +37,38 @@ public class DishLogDao {
 		return (List<Dish>)session.createQuery(hql).list();
 	}
 	
+	
+	public List<Dish> getAllDishes(long restaurantId){
+		return dishDao.findByShopId(restaurantId);
+	}
 	@SuppressWarnings("unchecked")
 	public List<DishLogView> getYestodayLog(long restaurantId){
-		String hql = "select a.id, a.shopId, a.name, a.type, a.description, a.price, a.photo, a.ingredient, a.discount, a.sold, a.flavor, b.available from Dish as a, DishLog as b where a.id = b.dishId and b.dat = SUBDATE(CURDATE(),1) and b.restaurantId="+restaurantId;
+		String hql = "select a.id, a.shopId, b.available, a.type, a.name, a.description, a.photo,a.ingredient,a.price,   a.discount,  a.flavor, a.sold from Dish as a, DishLog as b where a.id = b.dishId and b.dat = SUBDATE(CURDATE(),1) and b.restaurantId="+restaurantId;
 		Session session = sessionFactory.getCurrentSession();
-		return  (List<DishLogView>)session.createQuery(hql).list();
+		return session.createSQLQuery(hql).addEntity(DishLogView.class).list();
+//		List result = session.createQuery(hql).list();
+//		ArrayList<DishLogView> list = new ArrayList<DishLogView>();
+//		for(int i=0; i<list.size(); i++){
+//			list.add((DishLogView)result.get(i));
+//		}
+//		return list;
 		
 //		.setResultTransformer(Transformers.aliasToBean(MessageExtDto.class));
 		
 	}
 	
-	public void saveTodayLog(List<DishLog> log){
+	public void saveTodayLog(List<DishLog> log) {
 		for (DishLog o : log){
+			try {
+				
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String dat = dateFormat.format(o.getDat()).toString().substring(0, 10);
+//System.out.println("dat： "+dat);
+				o.setDat(new SimpleDateFormat("yyyy-MM-dd").parse(dat));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			sessionFactory.getCurrentSession().save(o);
 		}
 	}

@@ -34,7 +34,13 @@ public class DishServiceImp implements DishService {
 		dishDao.save(updatedDish);
 		
 	}
-
+	
+	@Override
+	public List<Dish>
+	query_all(long shop_id){
+		return dishLogDao.getAllDishes(shop_id);
+	}
+	
 	@Override
 	public List<Dish> query (long shop_id) {
 		//return dishDao.findByShopId(shop_id);

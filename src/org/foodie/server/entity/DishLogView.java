@@ -77,8 +77,8 @@ public class DishLogView {
 		return shopId;
 	}
 
-	public void setShopId(long restaurantId) {
-		this.shopId = restaurantId;
+	public void setShopId(long shopId) {
+		this.shopId = shopId;
 	}
 
 	public Boolean getAvailable() {
