@@ -15,6 +15,7 @@ public interface RestaurantService {
 	public void update(Restaurant updatedRestaurant);
 	public List<Restaurant> query();
 	public Restaurant queryId(long id);
+	public Restaurant queryByEmail(String email);
 }
 
 

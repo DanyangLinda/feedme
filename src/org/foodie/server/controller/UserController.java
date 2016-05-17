@@ -81,6 +81,8 @@ public class UserController {
 	  }
   }
   
+  
+  
   @RequestMapping("/delete")
   @ResponseBody
   public String delete(/*@RequestParam("id")long id*/) {

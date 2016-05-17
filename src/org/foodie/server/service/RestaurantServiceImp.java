@@ -38,4 +38,9 @@ public class RestaurantServiceImp implements RestaurantService {
 	public Restaurant queryId(long id) {		
 		return restaurantDao.findById(id);
 	}
+	
+	@Override
+	public Restaurant queryByEmail(String email){
+		return restaurantDao.findByEmail(email);
+	}
 }

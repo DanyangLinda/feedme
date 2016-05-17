@@ -1,54 +1,51 @@
-package org.foodie.server.entity;
-/**
- * @author Danyang Li
- */
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+package org.foodie.server.infor;
 
-@Entity
-@Table(name="restaurant")
-public class Restaurant {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+import javax.persistence.Column;
+
+import org.foodie.server.entity.Restaurant;
+
+public class RestaurantFullInfor extends Infor{
+	private static final long serialVersionUID = 1L;
+	
 	private long id;
 
-	@Column(name="name", nullable=false)
 	private String name;
 	
-	@Column(name="logo")
 	private String logo;
 	
-	@Column(name="description")
 	private String description;
 	
-	@Column(name="type")
 	private String type;
 	
-	@Column(name="phone")
 	private String phone;
 	
-	@Column(name="email")
 	private String email;
 	
-	@Column(name="openTimeMorning")
 	private String openTimeMorning;
 	
-	@Column(name="openTimeAfternoon")
 	private String openTimeAfternoon;
 	
-	@Column(name="checkin")
 	private Boolean checkin;
-	
-	@Column(name="password")
-	private String password;
 
-	public Restaurant(){
+	private String password;
+	
+
+	public RestaurantFullInfor(){
 		
+	}
+	
+	public RestaurantFullInfor(Restaurant restaurant){
+		this.id=restaurant.getId();
+		this.name=restaurant.getName();
+		this.logo=restaurant.getLogo();
+		this.description=restaurant.getDescription();
+		this.email=restaurant.getEmail();
+		this.phone=restaurant.getPhone();
+		this.openTimeAfternoon=restaurant.getOpenTimeMorning();
+		this.password=restaurant.getPassword();
+		this.type=restaurant.getType();
+		this.openTimeMorning=restaurant.getOpenTimeMorning();
+		this.checkin=restaurant.getCheckin();
 	}
 	
 	public String getPassword() {
@@ -59,9 +56,8 @@ public class Restaurant {
 		this.password = password;
 	}
 
-
-
-	public Restaurant(long id){
+	
+	public RestaurantFullInfor(long id){
 		this.id=id;
 	}
 	
