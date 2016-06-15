@@ -32,7 +32,7 @@ public class DishLogDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Dish> getAvailableDishes(long restaurantId){
-		String hql="select a from Dish a, DishLog b where a.id = b.dishId and b.available = 1 and  b.dat = current_date() and b.restaurantId ="+restaurantId+" and a.shopId="+restaurantId;
+		String hql="select a from Dish a, DishLog b where a.id = b.dish_id and b.available = 1 and  b.dat = current_date() and b.restaurant_id ="+restaurantId+" and a.shopId="+restaurantId;
 		Session session = sessionFactory.getCurrentSession();
 		return (List<Dish>)session.createQuery(hql).list();
 	}
